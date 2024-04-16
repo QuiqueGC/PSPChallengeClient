@@ -2,8 +2,7 @@ package listeners;
 
 import j_panels.PanelUser;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.BlowFishManager;
-import tools_classes.FilesRW;
+import utils.BlowFishManager;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -78,7 +77,7 @@ public class PanelEditProfileListener extends MouseAdapter {
             PSPChallenge.actualUser.setPasswd(encryptedPasswd);
         }
 
-        FilesRW.overwrittingFile();
+        // TODO: 16/04/2024 enviar al server los datos
 
         PSPChallenge.frame.setContentPane(new PanelUser());
     }

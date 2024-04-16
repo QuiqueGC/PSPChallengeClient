@@ -4,11 +4,6 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import data_classes.User;
-import p_s_p_challenge.PSPChallenge;
-import tools_classes.BlowFishManager;
-import tools_classes.FilesRW;
-
 public class UserCreationDialogListener extends MouseAdapter {
 
     private final JTextField NAME_FIELD;
@@ -57,11 +52,10 @@ public class UserCreationDialogListener extends MouseAdapter {
 
         } else {
 
-            checkingIfUserExist(name);
 
             if (!alreadyExist) {
 
-                creatingNewUser(name, passwd);
+                // TODO: 16/04/2024 pasar el usuario al server para hacer el registro
 
             } else {
 
@@ -69,28 +63,5 @@ public class UserCreationDialogListener extends MouseAdapter {
             }
         }
 
-    }
-
-    private void checkingIfUserExist(String name) {
-
-        for (User user :
-                PSPChallenge.usersList) {
-
-            if (user.getName().toUpperCase().trim().equals(name.toUpperCase())) {
-                alreadyExist = true;
-            }
-        }
-    }
-
-    private void creatingNewUser(String name, String passwd) {
-
-        passwd = BlowFishManager.encryptingPasswd(passwd);
-
-        User user = new User(name, passwd, USER_TYPE);
-
-        FilesRW.addingNewUser(user);
-
-        PSPChallenge.usersList.add(user);
-        DIALOG.dispose();
     }
 }

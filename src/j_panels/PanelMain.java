@@ -3,7 +3,7 @@ package j_panels;
 import j_dialogs.LoginDialog;
 import j_dialogs.UserCreationDialog;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.SpellBook;
+import utils.SpellBook;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -13,9 +13,6 @@ public class PanelMain extends JPanel {
 
     public PanelMain() {
 
-
-        chooseServerOrClient();
-
         SpellBook.creatingStandardPanelForFrame(this);
 
         addingLabels();
@@ -23,20 +20,7 @@ public class PanelMain extends JPanel {
         PSPChallenge.frame.setTitle("Programa de gestión de usuarios y procesos");
     }
 
-    private void chooseServerOrClient() {
-        int adminChoice = JOptionPane.showConfirmDialog(null, "Quieres iniciar sesión como administrador", "Tipo de usuario", JOptionPane.YES_NO_OPTION);
 
-        if (adminChoice == JOptionPane.NO_OPTION) {
-            showConnectionDialog();
-        }
-    }
-
-    private void showConnectionDialog() {
-        String ip;
-        do {
-            ip = JOptionPane.showInputDialog(null, "Introduce IP del servidor", "Conectarse", JOptionPane.OK_CANCEL_OPTION);
-        }while (ip == null || ip.equals(""));
-    }
 
     private void addingLabels() {
 
@@ -96,14 +80,13 @@ public class PanelMain extends JPanel {
                 this.getWidth() / 2 - registerButton.getWidth() / 2,
                 100);
         this.add(registerButton);
+
         registerButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                int userType = PSPChallenge.usersList.isEmpty() ? 0 : 2;
-
-                UserCreationDialog dialog = new UserCreationDialog(userType);
+                UserCreationDialog dialog = new UserCreationDialog(2);
                 dialog.setVisible(true);
             }
         });

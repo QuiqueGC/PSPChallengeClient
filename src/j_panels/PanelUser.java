@@ -1,7 +1,7 @@
 package j_panels;
 
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.SpellBook;
+import utils.SpellBook;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -25,51 +25,7 @@ public class PanelUser extends JPanel {
         addingProfileButton();
 
         addingLogoutButton();
-
-        addingInstalledPrgButton();
-
-        addingExecuteProgButton();
-
     }
-
-    private void addingExecuteProgButton() {
-        JButton executingProgButton = new JButton();
-        executingProgButton.setText("Procesos en ejecución");
-        executingProgButton.setSize(200, 50);
-        executingProgButton.setLocation(
-                20,
-                250);
-        this.add(executingProgButton);
-        executingProgButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                PSPChallenge.frame.setContentPane(new PanelExecutingPrograms());
-            }
-        });
-
-    }
-
-    private void addingInstalledPrgButton() {
-
-        JButton consultButton = new JButton();
-        consultButton.setText("Programas instalados");
-        consultButton.setSize(200, 50);
-        consultButton.setLocation(
-                20,
-                150);
-        this.add(consultButton);
-        consultButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                PSPChallenge.frame.setContentPane(new PanelInstalledPrograms());
-            }
-        });
-    }
-
 
     private void addingProfileButton() {
         JButton profileButton = new JButton();

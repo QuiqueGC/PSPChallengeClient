@@ -1,8 +1,5 @@
 package listeners;
 
-import p_s_p_challenge.PSPChallenge;
-import tools_classes.FilesRW;
-
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -27,10 +24,17 @@ public class FrameWindowListener extends WindowAdapter {
     public void windowOpened(WindowEvent e) {
         super.windowOpened(e);
 
-        FilesRW.takingUserDataFromFile(PSPChallenge.usersList);
+        showConnectionDialog();
 
     }
 
+    private void showConnectionDialog() {
+        String ip;
+        do {
+            ip = JOptionPane.showInputDialog(null, "Introduce IP del servidor", "Conectarse", JOptionPane.OK_CANCEL_OPTION);
+        } while (ip == null || ip.equals(""));
+        // TODO: 16/04/2024 conectar con el server
+    }
 
     /**
      * evento para el cierre de la ventana

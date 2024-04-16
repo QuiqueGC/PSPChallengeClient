@@ -1,16 +1,15 @@
 package p_s_p_challenge;
 
 import data_classes.User;
-import listeners.FrameWindowListener;
 import j_panels.PanelMain;
+import listeners.FrameWindowListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 
 public class PSPChallenge {
-    public static ArrayList<User> usersList = new ArrayList<>();
+
     public static User actualUser;
 
     public static JFrame frame;
