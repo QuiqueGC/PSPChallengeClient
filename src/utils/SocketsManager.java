@@ -81,6 +81,19 @@ public abstract class SocketsManager {
         }
     }
 
+    public static User getUserFromServer() {
+        User user = null;
+        try {
+            InputStream is = socket.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
+            user = (User) ois.readObject();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return user;
+    }
+
     /**
      * Recibe una respuesta del server para poder mostrarla en un diálogo
      *

@@ -1,6 +1,8 @@
 package listeners;
 
 import data_classes.User;
+import j_panels.PanelUser;
+import p_s_p_challenge.PSPChallenge;
 import utils.SocketsManager;
 
 import javax.swing.*;
@@ -39,11 +41,20 @@ public class LoginDialogListener extends MouseAdapter {
             JOptionPane.showMessageDialog(null, "No has introducido contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
 
         } else {
+            tryToLogin(name, passwd);
+        }
+    }
 
-            SocketsManager.sendPetition("login");
-            SocketsManager.sendUser(new User(name, passwd, 2));
-            String response = SocketsManager.getResponse();
-            JOptionPane.showMessageDialog(null, response, "Información", JOptionPane.INFORMATION_MESSAGE);
+
+    private void tryToLogin(String name, String passwd) {
+        SocketsManager.sendPetition("login");
+        SocketsManager.sendUser(new User(name, passwd, 2));
+        String response = SocketsManager.getResponse();
+        JOptionPane.showMessageDialog(null, response, "Información", JOptionPane.INFORMATION_MESSAGE);
+        DIALOG.dispose();
+        if (response.equals("Login realizado con éxito")) {
+            PSPChallenge.actualUser = SocketsManager.getUserFromServer();
+            PSPChallenge.frame.setContentPane(new PanelUser());
         }
     }
 }
