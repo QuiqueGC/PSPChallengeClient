@@ -3,6 +3,10 @@ package utils;
 import data_classes.User;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public abstract class SocketsManager {
@@ -42,6 +46,59 @@ public abstract class SocketsManager {
             JOptionPane.showMessageDialog(null, "No se ha podido establecer la conexión", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return isConnected;
+    }
+
+
+    /**
+     * Envía la petición en forma de string
+     *
+     * @param petition string con la petición
+     */
+    public static void sendPetition(String petition) {
+        try {
+
+            new ObjectOutputStream(socket.getOutputStream()).writeObject(petition);
+
+        } catch (IOException ex) {
+
+            System.out.println("excepción IOE");
+        }
+    }
+
+    /**
+     * Envía un objeto de tipo User al server
+     *
+     * @param user User que enviará al server
+     */
+    public static void sendUser(User user) {
+        try {
+
+            new ObjectOutputStream(socket.getOutputStream()).writeObject(user);
+
+        } catch (IOException ex) {
+
+            System.out.println("excepción IOE");
+        }
+    }
+
+    /**
+     * Recibe una respuesta del server para poder mostrarla en un diálogo
+     *
+     * @return String con la respuesta del server
+     */
+    public static String getResponse() {
+        String response = "";
+        try {
+            InputStream is = socket.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
+            response = (String) ois.readObject();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+
+        return response;
     }
 
 }

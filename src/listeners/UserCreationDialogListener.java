@@ -1,5 +1,8 @@
 package listeners;
 
+import data_classes.User;
+import utils.SocketsManager;
+
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,7 +17,6 @@ public class UserCreationDialogListener extends MouseAdapter {
 
     private final int USER_TYPE;
 
-    private boolean alreadyExist;
 
     public UserCreationDialogListener(JDialog dialog, JTextField nameField, JPasswordField passwdField, JPasswordField passwdField2, int userType) {
         this.NAME_FIELD = nameField;
@@ -28,7 +30,6 @@ public class UserCreationDialogListener extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
 
-        alreadyExist = false;
         String name = NAME_FIELD.getText().trim();
         String passwd = String.valueOf(PASSWD_FIELD.getPassword()).trim();
         String passwd2 = String.valueOf(PASSWD_FIELD_2.getPassword()).trim();
@@ -51,16 +52,12 @@ public class UserCreationDialogListener extends MouseAdapter {
             JOptionPane.showMessageDialog(null, "La contraseña y la confirmación de contraseña no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
 
         } else {
+            SocketsManager.sendPetition("register");
+            SocketsManager.sendUser(new User(name, passwd, 2));
+            String response = SocketsManager.getResponse();
+            JOptionPane.showMessageDialog(null, response, "Información", JOptionPane.INFORMATION_MESSAGE);
+            DIALOG.dispose();
 
-
-            if (!alreadyExist) {
-
-                // TODO: 16/04/2024 pasar el usuario al server para hacer el registro
-
-            } else {
-
-                JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
         }
 
     }

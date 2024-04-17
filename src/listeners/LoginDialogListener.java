@@ -1,6 +1,7 @@
 package listeners;
 
 import data_classes.User;
+import utils.SocketsManager;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -14,7 +15,6 @@ public class LoginDialogListener extends MouseAdapter {
     private final JTextField NAME_FIELD;
     private final JPasswordField PASSWD_FIELD;
     private final JDialog DIALOG;
-    private User foundUser;
 
 
     public LoginDialogListener(JTextField nameField, JPasswordField paswdField, JDialog dialog) {
@@ -40,9 +40,10 @@ public class LoginDialogListener extends MouseAdapter {
 
         } else {
 
-            // TODO: 17/04/2024 buscar user en el server
-
-
+            SocketsManager.sendPetition("login");
+            SocketsManager.sendUser(new User(name, passwd, 2));
+            String response = SocketsManager.getResponse();
+            JOptionPane.showMessageDialog(null, response, "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }
