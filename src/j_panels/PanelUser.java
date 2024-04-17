@@ -17,6 +17,7 @@ public class PanelUser extends JPanel {
         addingButtons();
 
         PSPChallenge.frame.setTitle("Panel de control de usuario");
+
     }
 
 

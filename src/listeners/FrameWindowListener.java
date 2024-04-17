@@ -1,5 +1,7 @@
 package listeners;
 
+import utils.SocketsManager;
+
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -9,6 +11,7 @@ import java.awt.event.WindowEvent;
  */
 public class FrameWindowListener extends WindowAdapter {
     JFrame frame;
+    boolean isConnected;
 
     public FrameWindowListener(JFrame frame) {
         this.frame = frame;
@@ -24,17 +27,24 @@ public class FrameWindowListener extends WindowAdapter {
     public void windowOpened(WindowEvent e) {
         super.windowOpened(e);
 
-        showConnectionDialog();
+        do {
+            showConnectionDialog();
+
+        } while (!isConnected);
 
     }
+
 
     private void showConnectionDialog() {
         String ip;
         do {
             ip = JOptionPane.showInputDialog(null, "Introduce IP del servidor", "Conectarse", JOptionPane.OK_CANCEL_OPTION);
         } while (ip == null || ip.equals(""));
-        // TODO: 16/04/2024 conectar con el server
+        SocketsManager.ipServer = ip;
+
+        isConnected = SocketsManager.establishConnection();
     }
+
 
     /**
      * evento para el cierre de la ventana

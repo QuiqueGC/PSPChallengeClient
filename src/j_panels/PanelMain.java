@@ -17,7 +17,7 @@ public class PanelMain extends JPanel {
 
         addingLabels();
 
-        PSPChallenge.frame.setTitle("Programa de gestión de usuarios y procesos");
+        PSPChallenge.frame.setTitle("Cliente");
     }
 
 

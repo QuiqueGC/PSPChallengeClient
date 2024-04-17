@@ -1,9 +1,6 @@
 package listeners;
 
 import data_classes.User;
-import j_panels.PanelUser;
-import p_s_p_challenge.PSPChallenge;
-import utils.BlowFishManager;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -43,40 +40,9 @@ public class LoginDialogListener extends MouseAdapter {
 
         } else {
 
-            lookingForUser(name);
-
-            if (foundUser != null) {
-
-                loginUser(passwd);
-
-            } else {
-
-                JOptionPane.showMessageDialog(null, "El nombre de usuario no está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
-    private void lookingForUser(String name) {
-        // TODO: 16/04/2024 buscar usuario en el server (tiene que devolver un user)
-        //  para asignarle el valor a foundUser
-
-    }
-
-    private void loginUser(String passwd) {
-
-        // TODO: 16/04/2024 hacer login con el server
-        if (BlowFishManager.checkingPasswd(passwd, foundUser)) {
-
-            PSPChallenge.actualUser = foundUser;
-
-            DIALOG.dispose();
-
-            PSPChallenge.frame.setContentPane(new PanelUser());
+            // TODO: 17/04/2024 buscar user en el server
 
 
-        } else {
-
-            JOptionPane.showMessageDialog(null, "La contraseña no coincide con la del usuario.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
