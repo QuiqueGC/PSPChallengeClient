@@ -42,7 +42,6 @@ public class ConnectionThread extends Thread {
                     break;
             }
 
-
         } while (!exit);
 
     }

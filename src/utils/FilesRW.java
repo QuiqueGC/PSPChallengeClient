@@ -49,8 +49,6 @@ public class FilesRW {
     }
 
 
-
-
     public static void writtingProcessesInFile(Path path, ArrayList<String> processesList) {
         for (String string : processesList) {
 
