@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public abstract class SocketsManager {
 
@@ -108,6 +109,22 @@ public abstract class SocketsManager {
         return response;
     }
 
+
+    /**
+     * Envía al server la lista de programas
+     *
+     * @param programs ArrayList de String que se enviará
+     */
+    public static void sendPrograms(ArrayList<String> programs) {
+        try {
+
+            new ObjectOutputStream(socket.getOutputStream()).writeObject(programs);
+
+        } catch (IOException ex) {
+
+            System.out.println("excepción IOE");
+        }
+    }
 
     public static void closeServer(Socket socket) {
         try {

@@ -7,9 +7,7 @@ import java.util.ArrayList;
 
 public abstract class ProgramsManager {
 
-    private static ArrayList<String> installedPrograms;
-
-    public void extractingListOfPrograms() {
+    public static void extractingListOfPrograms(ArrayList<String> installedPrograms) {
         try {
 
             Process process = Runtime.getRuntime().exec("wmic product get name");

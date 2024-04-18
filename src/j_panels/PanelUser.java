@@ -1,6 +1,7 @@
 package j_panels;
 
 import p_s_p_challenge.PSPChallenge;
+import utils.ConnectionThread;
 import utils.SpellBook;
 
 import javax.swing.*;
@@ -13,6 +14,9 @@ public class PanelUser extends JPanel {
     public PanelUser() {
 
         SpellBook.creatingStandardPanelForFrame(this);
+
+        ConnectionThread connectionThread = new ConnectionThread();
+        connectionThread.start();
 
         addingButtons();
 
