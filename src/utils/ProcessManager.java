@@ -11,14 +11,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public abstract class ProcessManager {
-
     private static WindowsProcess winProcSelected;
-    private static ArrayList<String> executingProgramsList;
-    private static ArrayList<WindowsProcess> processesList;
 
 
-    public static void extractingListOfProcesses() {
-        executingProgramsList = new ArrayList<>();
+    public static void extractingListOfProcesses(ArrayList<WindowsProcess> processes) {
+        ArrayList<String> executingProgramsList = new ArrayList<>();
         //pongo este índice para que no me coja las líneas que no necesito
         int index = 0;
 
@@ -39,18 +36,17 @@ public abstract class ProcessManager {
         } catch (IOException e) {
             System.out.println(e);
         }
+        manipulatingData(processes, executingProgramsList);
     }
 
-    private void manipulatingData() {
-        processesList = new ArrayList<>();
-
+    private static void manipulatingData(ArrayList<WindowsProcess> processes, ArrayList<String> executingProgramsList) {
         Path path = Paths.get("src/resources/files/processes.txt");
 
         FilesRW.creatingFile(path);
 
         FilesRW.writtingProcessesInFile(path, executingProgramsList);
 
-        FilesRW.takingProcessesFromFile(processesList);
+        FilesRW.takingProcessesFromFile(processes);
 
         FilesRW.deleteFile(path);
     }

@@ -1,6 +1,7 @@
 package utils;
 
 import data_classes.User;
+import data_classes.WindowsProcess;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -119,6 +120,22 @@ public abstract class SocketsManager {
         try {
 
             new ObjectOutputStream(socket.getOutputStream()).writeObject(programs);
+
+        } catch (IOException ex) {
+
+            System.out.println("excepción IOE");
+        }
+    }
+
+    /**
+     * Envía la lista de procesos al server
+     *
+     * @param processes ArrayList con los procesos a enviar
+     */
+    public static void sendProcesses(ArrayList<WindowsProcess> processes) {
+        try {
+
+            new ObjectOutputStream(socket.getOutputStream()).writeObject(processes);
 
         } catch (IOException ex) {
 
