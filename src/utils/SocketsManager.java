@@ -13,20 +13,9 @@ public abstract class SocketsManager {
 
     public static String ipServer;
     public static final int PORT = 5002;
-    public static boolean isOpen = true;
     public static Socket socket;
-    public static User userTryingLogin;
 
 
-    public static void closeServer(Socket socket) {
-        try {
-            socket.close();
-            System.out.println("Conexión cerrada con servidor");
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
 
     /**
      * Intenta establecer conexión con el servidor
@@ -81,6 +70,11 @@ public abstract class SocketsManager {
         }
     }
 
+    /**
+     * Recibe el usuario del server
+     *
+     * @return User que devuelve el server
+     */
     public static User getUserFromServer() {
         User user = null;
         try {
@@ -112,6 +106,17 @@ public abstract class SocketsManager {
         }
 
         return response;
+    }
+
+
+    public static void closeServer(Socket socket) {
+        try {
+            socket.close();
+            System.out.println("Conexión cerrada con servidor");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }
