@@ -19,7 +19,6 @@ public class ConnectionThread extends Thread {
     @Override
     public void run() {
         super.run();
-        String response;
 
         do {
             programs.clear();
@@ -30,20 +29,26 @@ public class ConnectionThread extends Thread {
             ProcessManager.extractingListOfProcesses(processes);
             SocketsManager.sendProcesses(processes);
 
+            receiveOrderFromServer();
 
-            String serverOrder = SocketsManager.getString();
-            switch (serverOrder) {
-                case "stopProcess":
-                    String pid = SocketsManager.getString();
-                    response = ProcessManager.stoppingProcess(pid);
-                    SocketsManager.sendString(response);
-                    break;
-                default:
-                    break;
-            }
 
         } while (!exit);
 
+    }
+
+
+    /**
+     * Recibe la orden del server de detener algún proceso
+     */
+    private void receiveOrderFromServer() {
+        String response;
+        String serverOrder = SocketsManager.getString();
+
+        if (serverOrder.equals("stopProcess")) {
+            String pid = SocketsManager.getString();
+            response = ProcessManager.stoppingProcess(pid);
+            SocketsManager.sendString(response);
+        }
     }
 
 }
