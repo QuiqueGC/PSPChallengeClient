@@ -54,7 +54,7 @@ public class UserCreationDialogListener extends MouseAdapter {
         } else {
             SocketsManager.sendPetition("register");
             SocketsManager.sendUser(new User(name, passwd, 2));
-            String response = SocketsManager.getResponse();
+            String response = SocketsManager.getString();
             JOptionPane.showMessageDialog(null, response, "Información", JOptionPane.INFORMATION_MESSAGE);
             DIALOG.dispose();
 

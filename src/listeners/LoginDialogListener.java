@@ -49,7 +49,7 @@ public class LoginDialogListener extends MouseAdapter {
     private void tryToLogin(String name, String passwd) {
         SocketsManager.sendPetition("login");
         SocketsManager.sendUser(new User(name, passwd, 2));
-        String response = SocketsManager.getResponse();
+        String response = SocketsManager.getString();
         JOptionPane.showMessageDialog(null, response, "Información", JOptionPane.INFORMATION_MESSAGE);
         DIALOG.dispose();
         if (response.equals("Login realizado con éxito")) {

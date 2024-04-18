@@ -95,7 +95,7 @@ public abstract class SocketsManager {
      *
      * @return String con la respuesta del server
      */
-    public static String getResponse() {
+    public static String getString() {
         String response = "";
         try {
             InputStream is = socket.getInputStream();
@@ -108,6 +108,19 @@ public abstract class SocketsManager {
         }
 
         return response;
+    }
+
+    /**
+     * Envía una respuesta al cliente
+     *
+     * @param response String con la respuesta
+     */
+    public static void sendString(String response) {
+        try {
+            new ObjectOutputStream(socket.getOutputStream()).writeObject(response);
+        } catch (IOException ex) {
+            System.out.println("excepción IOE");
+        }
     }
 
 

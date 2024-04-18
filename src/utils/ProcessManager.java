@@ -2,7 +2,6 @@ package utils;
 
 import data_classes.WindowsProcess;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -51,36 +50,18 @@ public abstract class ProcessManager {
         FilesRW.deleteFile(path);
     }
 
-
-    public static void checkingAndStoppingProcess() {
-
-        if (winProcSelected != null &&
-                winProcSelected.getType().equals("Console")) {
-
-            stoppingProcess();
-
-        } else if (winProcSelected == null) {
-
-            JOptionPane.showMessageDialog(null, "No has seleccionado ningún proceso.", "Error", JOptionPane.ERROR_MESSAGE);
-
-        } else if (!winProcSelected.getType().equals("Console")) {
-
-            JOptionPane.showMessageDialog(null, "Sólo puedes detener los procesos de tipo 'Console'.", "Error", JOptionPane.ERROR_MESSAGE);
-
-        }
-    }
-
-    private static void stoppingProcess() {
-
+    public static String stoppingProcess(String processPID) {
+        String response;
         try {
-            Runtime.getRuntime().exec("taskkill /F /PID ".concat(winProcSelected.getPID()));
+            Runtime.getRuntime().exec("taskkill /F /PID ".concat(processPID));
 
-            JOptionPane.showMessageDialog(null, "Proceso detenido exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
+            response = "Proceso detenido exitosamente";
+            //JOptionPane.showMessageDialog(null, "Proceso detenido exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (IOException ex) {
-
-            System.out.println("Problema ejecutando el comando");
+            response = "No se ha podido detener el proceso";
+            //System.out.println("Problema ejecutando el comando");
         }
+        return response;
     }
 }
