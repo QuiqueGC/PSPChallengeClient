@@ -12,7 +12,7 @@ import java.net.Socket;
 public abstract class SocketsManager {
 
     public static String ipServer;
-    public static final int PORT = 5000;
+    public static final int PORT = 5002;
     public static boolean isOpen = true;
     public static Socket socket;
     public static User userTryingLogin;

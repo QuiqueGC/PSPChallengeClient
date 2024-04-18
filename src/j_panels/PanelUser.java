@@ -23,12 +23,12 @@ public class PanelUser extends JPanel {
 
     protected void addingButtons() {
 
-        addingProfileButton();
+        addingProfileButton(this);
 
         addingLogoutButton();
     }
 
-    private void addingProfileButton() {
+    private void addingProfileButton(JPanel paneUser) {
         JButton profileButton = new JButton();
         profileButton.setText("Editar perfil");
         profileButton.setSize(200, 50);
@@ -41,7 +41,7 @@ public class PanelUser extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                PSPChallenge.frame.setContentPane(new PanelEditProfile());
+                PSPChallenge.frame.setContentPane(new PanelEditProfile(paneUser));
             }
         });
     }

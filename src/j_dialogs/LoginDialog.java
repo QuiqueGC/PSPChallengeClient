@@ -20,12 +20,12 @@ public class LoginDialog extends JDialog {
 
         textFieldsCreation();
 
-        buttonCreation();
+        buttonLogin();
 
         setContentPane(CONTENT_PANE);
     }
 
-    private void buttonCreation() {
+    private void buttonLogin() {
         JButton button = new JButton();
 
         button.setSize(100, 20);

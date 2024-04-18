@@ -13,8 +13,12 @@ public class PanelEditProfile extends JPanel {
     JPasswordField newPasswdField2;
     JPasswordField oldPasswdField;
 
+    JPanel panelUser;
 
-    public PanelEditProfile() {
+
+    public PanelEditProfile(JPanel panelUser) {
+
+        this.panelUser = panelUser;
 
         SpellBook.creatingStandardPanelForFrame(this);
 
@@ -29,7 +33,7 @@ public class PanelEditProfile extends JPanel {
 
         addingConfirmationButton();
 
-        SpellBook.addingBackButton(this);
+        SpellBook.addingBackButton(this, panelUser);
     }
 
 
