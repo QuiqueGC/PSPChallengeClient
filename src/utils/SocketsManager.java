@@ -165,7 +165,7 @@ public abstract class SocketsManager {
     }
 
     public static void sendLoggedInState() {
-        System.out.println("VALOR DEL BOOLEAN -> " + PSPChallenge.isLoggedIn);
+        System.out.println("VALOR DEL BOOLEAN IS_LOGGED_IN -> " + PSPChallenge.isLoggedIn);
         try {
 
             new DataOutputStream(socket.getOutputStream()).writeBoolean(PSPChallenge.isLoggedIn);
@@ -179,7 +179,24 @@ public abstract class SocketsManager {
     }
 
 
-    public static void closeServer() {
+    public static boolean getAdminConnection() {
+        boolean adminLogout = false;
+        try {
+            InputStream is = socket.getInputStream();
+            DataInputStream dis = new DataInputStream(is);
+
+            adminLogout = dis.readBoolean();
+
+        } catch (Exception e) {
+            System.out.println("Error cogiendo el boolean de login");
+            System.out.println(e);
+        }
+
+        return adminLogout;
+    }
+
+
+    public static void closeConnection() {
         try {
             socket.close();
             System.out.println("Conexión cerrada con servidor");

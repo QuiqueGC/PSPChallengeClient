@@ -1,6 +1,7 @@
 package utils;
 
 import data_classes.WindowsProcess;
+import j_panels.PanelMain;
 import p_s_p_challenge.PSPChallenge;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ public class ConnectionThread extends Thread {
 
     ArrayList<String> programs;
     ArrayList<WindowsProcess> processes;
-    boolean exit;
+    boolean exit, adminLogout;
 
 
     public ConnectionThread() {
@@ -25,6 +26,7 @@ public class ConnectionThread extends Thread {
 
         do {
             if (PSPChallenge.isLoggedIn) {
+
                 programs.clear();
                 System.out.println("ENVÍA PROGRAMAS");
                 ProgramsManager.extractingListOfPrograms(programs);
@@ -43,10 +45,25 @@ public class ConnectionThread extends Thread {
 
                 System.out.println("ENVÍA EL ESTADO DEL LOGED");
                 sendLoggedState();
+
+                if (!PSPChallenge.isLoggedIn) {
+                    PSPChallenge.frame.setContentPane(new PanelMain());
+                    exit = true;
+                }
+
+                System.out.println("RECIBE SI EL ADMIN SIGUE LOGEADO");
+                adminLogout = SocketsManager.getAdminConnection();
             }
 
-        } while (!exit);
+        } while (!exit && !adminLogout);
 
+        if (adminLogout) {
+            System.out.println("HA SALIDO DEL BUCLE POR LOGOUT DEL ADMIN");
+            PSPChallenge.isLoggedIn = false;
+            SocketsManager.closeConnection();
+            JOptionPane.showMessageDialog(null, "El servidor se ha cerrado. La aplicación se cerrará", "Información", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
     }
 
     private void sendLoggedState() {

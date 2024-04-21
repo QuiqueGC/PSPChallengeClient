@@ -46,7 +46,7 @@ public class PanelMain extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                SocketsManager.closeServer();
+                SocketsManager.closeConnection();
                 JOptionPane.showMessageDialog(null, "Hasta la próxima!");
 
                 System.exit(0);

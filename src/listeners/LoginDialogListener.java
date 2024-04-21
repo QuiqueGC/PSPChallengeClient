@@ -3,6 +3,7 @@ package listeners;
 import data_classes.User;
 import j_panels.PanelUser;
 import p_s_p_challenge.PSPChallenge;
+import utils.ConnectionThread;
 import utils.SocketsManager;
 
 import javax.swing.*;
@@ -57,6 +58,8 @@ public class LoginDialogListener extends MouseAdapter {
             PSPChallenge.actualUser = SocketsManager.getUserFromServer();
             PSPChallenge.frame.setContentPane(new PanelUser());
             PSPChallenge.isLoggedIn = true;
+            ConnectionThread connectionThread = new ConnectionThread();
+            connectionThread.start();
         }
     }
 }

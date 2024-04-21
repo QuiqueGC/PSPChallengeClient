@@ -1,27 +1,37 @@
 package j_panels;
 
 import p_s_p_challenge.PSPChallenge;
-import utils.ConnectionThread;
 import utils.SpellBook;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PanelUser extends JPanel {
 
+    JButton profileButton;
+    JButton logoutButton;
+    JLabel logoutLoading;
 
     public PanelUser() {
 
         SpellBook.creatingStandardPanelForFrame(this);
 
-        ConnectionThread connectionThread = new ConnectionThread();
-        connectionThread.start();
-
         addingButtons();
 
-        PSPChallenge.frame.setTitle("Panel de control de usuario");
+        addingLoadingLabel();
 
+        PSPChallenge.frame.setTitle("Panel de control de usuario");
+    }
+
+    private void addingLoadingLabel() {
+        logoutLoading = new JLabel();
+        logoutLoading.setSize(200, 200);
+        logoutLoading.setLocation(230, 150);
+        logoutLoading.setFont(new Font("Serif", Font.PLAIN, 26));
+        logoutLoading.setForeground(Color.white);
+        this.add(logoutLoading);
     }
 
 
@@ -33,7 +43,7 @@ public class PanelUser extends JPanel {
     }
 
     private void addingProfileButton(JPanel paneUser) {
-        JButton profileButton = new JButton();
+        profileButton = new JButton();
         profileButton.setText("Editar perfil");
         profileButton.setSize(200, 50);
         profileButton.setLocation(
@@ -51,8 +61,7 @@ public class PanelUser extends JPanel {
     }
 
     private void addingLogoutButton() {
-
-        JButton logoutButton = new JButton();
+        logoutButton = new JButton();
         logoutButton.setText("Cerrar sesión");
         logoutButton.setSize(150, 20);
         logoutButton.setLocation(
@@ -64,8 +73,11 @@ public class PanelUser extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                PSPChallenge.frame.setContentPane(new PanelMain());
                 PSPChallenge.isLoggedIn = false;
+                logoutButton.setEnabled(false);
+                logoutLoading.setText("Cerrando sesión...");
+
+                //JOptionPane.showMessageDialog(null, "Cerrando sesión", "Información", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
