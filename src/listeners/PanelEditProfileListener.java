@@ -77,7 +77,8 @@ public class PanelEditProfileListener extends MouseAdapter {
             PSPChallenge.actualUser.setPasswd(encryptedPasswd);
         }
 
-        // TODO: 16/04/2024 enviar al server los datos
+        PSPChallenge.changeUserProfileOrder = "changeUser";
+        JOptionPane.showMessageDialog(null, "Se ha enviado la petición al servidor", "Información", JOptionPane.INFORMATION_MESSAGE);
 
         PSPChallenge.frame.setContentPane(new PanelUser());
     }
