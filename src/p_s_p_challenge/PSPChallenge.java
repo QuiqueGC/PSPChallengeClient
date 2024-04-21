@@ -15,6 +15,7 @@ public class PSPChallenge {
     public static JFrame frame;
 
     public static String changeUserProfileOrder = "";
+    public static boolean isLoggedIn = false;
 
     public PSPChallenge() {
     }

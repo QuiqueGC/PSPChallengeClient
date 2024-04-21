@@ -47,6 +47,7 @@ public class LoginDialogListener extends MouseAdapter {
 
 
     private void tryToLogin(String name, String passwd) {
+        System.out.println("ENVÍA LA PETICIÓN DE LOGIN");
         SocketsManager.sendPetition("login");
         SocketsManager.sendUser(new User(name, passwd, 2));
         String response = SocketsManager.getString();
@@ -55,6 +56,7 @@ public class LoginDialogListener extends MouseAdapter {
         if (response.equals("Login realizado con éxito")) {
             PSPChallenge.actualUser = SocketsManager.getUserFromServer();
             PSPChallenge.frame.setContentPane(new PanelUser());
+            PSPChallenge.isLoggedIn = true;
         }
     }
 }

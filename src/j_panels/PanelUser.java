@@ -65,7 +65,7 @@ public class PanelUser extends JPanel {
                 super.mouseClicked(e);
 
                 PSPChallenge.frame.setContentPane(new PanelMain());
-                PSPChallenge.actualUser = null;
+                PSPChallenge.isLoggedIn = false;
             }
         });
     }

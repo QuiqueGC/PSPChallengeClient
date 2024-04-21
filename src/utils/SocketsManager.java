@@ -2,12 +2,10 @@ package utils;
 
 import data_classes.User;
 import data_classes.WindowsProcess;
+import p_s_p_challenge.PSPChallenge;
 
 import javax.swing.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -155,6 +153,20 @@ public abstract class SocketsManager {
             System.out.println("excepción IOE");
         }
     }
+
+    public static void sendLoggedInState() {
+        System.out.println("VALOR DEL BOOLEAN -> " + PSPChallenge.isLoggedIn);
+        try {
+
+            new DataOutputStream(socket.getOutputStream()).writeBoolean(PSPChallenge.isLoggedIn);
+
+        } catch (IOException ex) {
+
+            System.out.println("excepción IOE");
+            System.out.println("FALLO ENVIANDO BOOLEAN");
+        }
+    }
+
 
     public static void closeServer(Socket socket) {
         try {

@@ -25,20 +25,29 @@ public class ConnectionThread extends Thread {
 
         do {
             programs.clear();
+            System.out.println("ENVÍA PROGRAMAS");
             ProgramsManager.extractingListOfPrograms(programs);
             SocketsManager.sendPrograms(programs);
 
             processes.clear();
+            System.out.println("ENVÍA PROCESOS");
             ProcessManager.extractingListOfProcesses(processes);
             SocketsManager.sendProcesses(processes);
 
+            System.out.println("RECIBE PETICIÓN DEL SERVER");
             receiveOrderFromServer();
 
+            System.out.println("ENVÍA PETICIÓN AL SERVER");
             sendOrderToServer();
 
-
+            System.out.println("ENVÍA EL ESTADO DEL LOGED");
+            sendLoggedState();
         } while (!exit);
 
+    }
+
+    private void sendLoggedState() {
+        SocketsManager.sendLoggedInState();
     }
 
     /**

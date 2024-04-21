@@ -41,7 +41,7 @@ public class FrameWindowListener extends WindowAdapter {
             ip = JOptionPane.showInputDialog(null, "Introduce IP del servidor", "Conectarse", JOptionPane.OK_CANCEL_OPTION);
         } while (ip == null || ip.equals(""));
         SocketsManager.ipServer = ip;
-
+        System.out.println("ESTABLECE CONEXIÓN CON EL SERVIDOR");
         isConnected = SocketsManager.establishConnection();
     }
 
