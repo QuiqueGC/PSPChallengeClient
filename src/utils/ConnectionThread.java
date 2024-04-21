@@ -17,7 +17,6 @@ public class ConnectionThread extends Thread {
         programs = new ArrayList<>();
         processes = new ArrayList<>();
         exit = false;
-        PSPChallenge.changeUserProfileOrder = "";
     }
 
     @Override

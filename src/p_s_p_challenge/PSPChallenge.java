@@ -17,6 +17,7 @@ public class PSPChallenge {
     public static String changeUserProfileOrder;
 
     public PSPChallenge() {
+        changeUserProfileOrder = "";
     }
 
 
