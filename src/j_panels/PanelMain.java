@@ -3,6 +3,7 @@ package j_panels;
 import j_dialogs.LoginDialog;
 import j_dialogs.UserCreationDialog;
 import p_s_p_challenge.PSPChallenge;
+import utils.SocketsManager;
 import utils.SpellBook;
 
 import javax.swing.*;
@@ -45,6 +46,7 @@ public class PanelMain extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
+                SocketsManager.closeServer();
                 JOptionPane.showMessageDialog(null, "Hasta la próxima!");
 
                 System.exit(0);

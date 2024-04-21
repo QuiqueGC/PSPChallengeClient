@@ -49,7 +49,8 @@ public abstract class SocketsManager {
             new ObjectOutputStream(socket.getOutputStream()).writeObject(petition);
 
         } catch (IOException ex) {
-
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema con el servidor. La aplicación se cerrará", "Información", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
             System.out.println("excepción IOE");
         }
     }
@@ -65,7 +66,8 @@ public abstract class SocketsManager {
             new ObjectOutputStream(socket.getOutputStream()).writeObject(user);
 
         } catch (IOException ex) {
-
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema con el servidor. La aplicación se cerrará", "Información", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
             System.out.println("excepción IOE");
         }
     }
@@ -83,6 +85,8 @@ public abstract class SocketsManager {
             user = (User) ois.readObject();
 
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema con el servidor. La aplicación se cerrará", "Información", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
             System.out.println(e);
         }
         return user;
@@ -103,6 +107,8 @@ public abstract class SocketsManager {
         } catch (Exception e) {
 
             System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema con el servidor. La aplicación se cerrará", "Información", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
         }
 
         return response;
@@ -118,6 +124,8 @@ public abstract class SocketsManager {
             new ObjectOutputStream(socket.getOutputStream()).writeObject(response);
         } catch (IOException ex) {
             System.out.println("excepción IOE");
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema con el servidor. La aplicación se cerrará", "Información", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
         }
     }
 
@@ -133,7 +141,8 @@ public abstract class SocketsManager {
             new ObjectOutputStream(socket.getOutputStream()).writeObject(programs);
 
         } catch (IOException ex) {
-
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema con el servidor. La aplicación se cerrará", "Información", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
             System.out.println("excepción IOE");
         }
     }
@@ -149,7 +158,8 @@ public abstract class SocketsManager {
             new ObjectOutputStream(socket.getOutputStream()).writeObject(processes);
 
         } catch (IOException ex) {
-
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema con el servidor. La aplicación se cerrará", "Información", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
             System.out.println("excepción IOE");
         }
     }
@@ -161,14 +171,15 @@ public abstract class SocketsManager {
             new DataOutputStream(socket.getOutputStream()).writeBoolean(PSPChallenge.isLoggedIn);
 
         } catch (IOException ex) {
-
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema con el servidor. La aplicación se cerrará", "Información", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
             System.out.println("excepción IOE");
             System.out.println("FALLO ENVIANDO BOOLEAN");
         }
     }
 
 
-    public static void closeServer(Socket socket) {
+    public static void closeServer() {
         try {
             socket.close();
             System.out.println("Conexión cerrada con servidor");

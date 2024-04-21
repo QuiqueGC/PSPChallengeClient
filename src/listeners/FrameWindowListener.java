@@ -63,6 +63,7 @@ public class FrameWindowListener extends WindowAdapter {
 
         if (confirmado == JOptionPane.YES_OPTION) {
 
+            SocketsManager.closeServer();
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         } else {
